@@ -16,6 +16,12 @@ int main()
     int I;
     stringstream(input) >> I;
 
+    if(I<0)
+    {
+        I = 1; // catches negative values.
+        cout << "\n\tNegative values are disallowed.\n\tDefaulting to value \'1\'.\n\n";
+    }
+
     float fNum[I];
 
     for(int i = 0; i<I; i++)
