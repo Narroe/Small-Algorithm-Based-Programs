@@ -1,3 +1,4 @@
+
 #include<iostream>
 #include<string>
 #include<sstream>
@@ -22,7 +23,7 @@ int main()
         cout << "\n\tNegative values are disallowed.\n\tDefaulting to value \'1\'.\n\n";
     }
 
-    float fNum[I];
+    long unsigned int fNum[I];
 
     for(int i = 0; i<I; i++)
     {
