@@ -1,4 +1,3 @@
-// Temperature Converter (Fahrenheit/Celsius)
 
 #include<iostream>
 #include<string>
@@ -17,6 +16,8 @@ string get_inputNumber();
 bool test_inputNumberValidity(string);
 void process_inputNumber();
 
+int convert_FtoC(int);
+int convert_CtoF(int);
 void convert_temperature(char,int);
 
 int main()
@@ -89,7 +90,11 @@ bool test_inputNumberValidity(string in)
     stringstream(in) >> num;
 
     // num will automatically default to "0" if the input is invalid
-    if(num != 0 || in == "0") isValid = true;
+    if(num != 0 || in == "0")
+    {
+        isValid = true;
+        knownValue = num;
+    }
 
     return isValid;
 }
@@ -107,7 +112,18 @@ void process_inputNumber()
     }
 }
 
+int convert_FtoC(int num)
+{
+    return ((num - 32) * 5) / 9;
+}
+
+int convert_CtoF(int num)
+{
+    return ((num * 9) / 5) + 32;
+}
+
 void convert_temperature(char tType, int tValue)
 {
-
+    if(tType == 'F') cout << "\n\n\t" << tValue << " Fahrenheit == " << convert_FtoC(tValue) << " Celsius\n\n";
+    else if (tType == 'C') cout << "\n\n\t" << tValue << " Celsius == " << convert_CtoF(tValue) << " Fahrenheit\n\n";
 }
