@@ -1,3 +1,4 @@
+// Fibonacci Number Sequence Calculator
 
 #include<iostream>
 #include<string>
@@ -22,6 +23,7 @@ int main()
         I = 1; // catches negative values.
         cout << "\n\tNegative values are disallowed.\n\tDefaulting to value \'1\'.\n\n";
     }
+    else if (I == 0) I = 1; // side-steps a bug(?) where inputting "0" would output "4199639"
 
     long unsigned int fNum[I];
 
