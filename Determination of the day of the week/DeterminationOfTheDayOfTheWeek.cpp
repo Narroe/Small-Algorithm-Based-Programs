@@ -1,4 +1,5 @@
-// Day Name Finder (using Tomohiko Sakamoto's algorithm)
+/*NOT CURRENTLY WORKING*/
+// Day Name Finder (using Tomohiko Sakamoto's algorithm) 
 
 #include<iostream>
 #include<sstream>
