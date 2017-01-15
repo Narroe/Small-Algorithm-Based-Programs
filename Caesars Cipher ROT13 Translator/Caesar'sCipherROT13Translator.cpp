@@ -1,11 +1,26 @@
 // Caesar's cipher ROT13 (rotate by 13 places) translator
-// [INITIAL DRAFT - NOT FINISHED]
 
 #include<iostream>
 using namespace std;
 
+string gStr = ""; // global/translated string
+
+string get_input();
+string process_inputString(string);
+char indentify_char(char);
+char ROT13(char,char,int,bool);
+void update_gStr(char);
+void display_gStr();
+
 int main()
 {
+    cout << "\tCaesar's Cipher ROT13 (rotate by 13) Translator\n\n";
+    cout << "please input sentence:\n\n";
+    cout << "> ";
+
+    process_inputString(get_input());
+    display_gStr();
+    return 0;
 }
 
 string get_input()
@@ -19,12 +34,15 @@ string get_input()
 
 string process_inputString(string input)
 {
-
+    for(unsigned int i=0; i<input.length(); i++)
+    {
+        update_gStr(indentify_char(input[i]));
+    }
 }
 
 char indentify_char(char input)
 {
-    char fontCase = '';
+    char fontCase = ' ';
     int arrayIndex = 0;
     bool isValid = true; // is the character valid for translation (a-z or A-Z)
 
@@ -241,26 +259,43 @@ char indentify_char(char input)
             break;
 
         default:
-            cout << "input == " << input << "\n\n";
+            //cout << "input == " << input << "\n\n";
             isValid = false;
     }
 
-    return output;
+    return ROT13(input,fontCase,arrayIndex,isValid);
 }
 
 char ROT13(char input, char fontCase, int arrayIndex, bool isValid)
 {
-    char* uca[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'}; // Upper Case Array
-    char* lca[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}; // Lower Case Array
+    unsigned const int rot13 = 13;
+    char uca[] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'}; // Upper Case Array
+    char lca[] = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}; // Lower Case Array
+    unsigned int newIndex = 0;
 
     if(!isValid) return input; // not valid for translation? -> return value as is.
     else
     {
+        if((arrayIndex + rot13) > 26)
+        {
+           // loop round to the start of the alphabet
+           newIndex = (arrayIndex + rot13) - 26;
+        }
+        else newIndex = arrayIndex + rot13;
 
+
+        if(fontCase == 'u') return uca[newIndex];
+        else if(fontCase == 'l') return lca[newIndex];
+        else cout << "\n\tERROR @ ROT13(), fontCase == " << fontCase << "\n\n";
     }
 }
 
-void display_output(string str)
+void update_gStr(char input)
 {
-    cout << str << endl;
+    gStr += input;
+}
+
+void display_gStr()
+{
+    cout << "\n> " << gStr << "\n\n";
 }
