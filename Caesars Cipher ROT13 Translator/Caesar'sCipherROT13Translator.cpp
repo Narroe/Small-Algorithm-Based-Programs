@@ -276,7 +276,7 @@ char ROT13(char input, char fontCase, int arrayIndex, bool isValid)
     if(!isValid) return input; // not valid for translation? -> return value as is.
     else
     {
-        if((arrayIndex + rot13) > 26)
+        if((arrayIndex + rot13) > 25)
         {
            // loop round to the start of the alphabet
            newIndex = (arrayIndex + rot13) - 26;
