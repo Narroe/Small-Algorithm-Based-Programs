@@ -61,8 +61,9 @@ void separate_string(string str)
             while(pos<=i);
 
             // checks if current word is the last word
-            if(i == str.length()) store_translatedString(translate_word(subStr, true));
+            if(i == str.length()-1) store_translatedString(translate_word(subStr, true));
             else store_translatedString(translate_word(subStr, false));
+
         }
     }
 }
@@ -74,7 +75,7 @@ void separate_string(string str)
 
 string translate_word(string input, bool isLast)
 {
-    cout << "iL:" << isLast << "|" << input << "|"; // test
+    cout << "[iL:" << isLast << " " << input << "] "; // test
 
     string output = "";
     unsigned int index = 0;
@@ -107,7 +108,7 @@ string translate_word(string input, bool isLast)
         else
         {
             // suffix appropriate end
-            if(index == 0) output += "-yay";
+            if(index == 0) output += "-way";
             else if(index == 1)
             {
                 output += "-";
