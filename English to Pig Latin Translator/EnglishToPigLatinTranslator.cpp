@@ -31,7 +31,8 @@ int main()
 void welcomeMsg()
 {
     cout << "\tEnglish to Pig Latin translator\n\n";
-    cout << "please enter a sentence for translation (no punctuation)\n\n";
+    cout << " please enter a sentence for translation\n";
+    cout << "(with no punctuation & in lowercase only)\n\n";
     cout << "> ";
 }
 
@@ -83,7 +84,7 @@ string translate_word(string input, bool isLast)
 
     // work out string length
     if(isLast) strLength = input.length();
-    else strLength = input.length()-1;
+    else strLength = input.length()-1; // this is because the space (" ") at the end of a word, is counted as part of the word length at this stage.
 
     /* work out what character types the word starts with
         i.e. are there 1, 2, or 3 consonants in a row
@@ -92,23 +93,26 @@ string translate_word(string input, bool isLast)
         e.g. 1-"hello", 2-"there", 3-"school", 0-"apple" */
 
     // 1st first letter is a vowel
-    if(isLetterVowel(input[0])) index = 0;
+    if(isLetterVowel(input[0]) == true) index = 0;
     // 1st letter is a consonant (& second letter is a vowel)
-    if(!isLetterVowel(input[0]) && isLetterVowel(input[1])) index = 1;
+    else if(!isLetterVowel(input[0]) && isLetterVowel(input[1])) index = 1;
     // 1st && 2nd letters are consonants (& 3rd letter is a vowel)
-    if (!isLetterVowel(input[0]) && !isLetterVowel(input[1]) && isLetterVowel(input[2])) index = 2;
+    else if (!isLetterVowel(input[0]) && !isLetterVowel(input[1]) && isLetterVowel(input[2])) index = 2;
     // 1st, 2nd, && 3rd letters are consonants
-    if (!isLetterVowel(input[0]) && !isLetterVowel(input[1]) && !isLetterVowel(input[2]) && isLetterVowel(input[3])) index = 3;
+    else if (!isLetterVowel(input[0]) && !isLetterVowel(input[1]) && !isLetterVowel(input[2]) && isLetterVowel(input[3])) index = 3;
 
     // string population loop
-    for(unsigned int i = 0; i<strLength; i++)
+    for(unsigned int i = 0; i<=strLength; i++) // the "=" (in "i<=strLength")is to add one extra iteration for the zero value index word to output properly.
     {
         // as long as (i+index) less than input.length();
-        if((i+index)<strLength) output += input[i+index];
+        if((i+index)<strLength) output += input[i+index]; // <-- it is needed (the "=") because of this conditional statement, never being false within the above for-loop otherwise.
         else
         {
             // suffix appropriate end
-            if(index == 0) output += "-way";
+            if(index == 0)
+            {
+                output += "-way";
+            }
             else if(index == 1)
             {
                 output += "-";
@@ -141,8 +145,8 @@ string translate_word(string input, bool isLast)
 bool isLetterVowel(char l)
 {
     bool isVowel = false;
-    if(l == 'a' || l == 'e' || l == 'i' || l == 'o' || l == 'u') isVowel = true;
-    //cout << "[" << isVowel << "]\n";
+    if(l == 'a' || l == 'e' || l == 'i' || l == 'o' || l == 'u' || l == 'y'/*"Y" as a vowel*/) isVowel = true;
+    cout << "[" << isVowel << "]\n";
     return isVowel;
 }
 
