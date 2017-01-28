@@ -76,7 +76,7 @@ void separate_string(string str)
 
 string translate_word(string input, bool isLast)
 {
-    cout << "[iL:" << isLast << " " << input << "] "; // test
+    //cout << "[iL:" << isLast << " " << input << "] "; // test
 
     string output = "";
     unsigned int index = 0;
@@ -93,13 +93,13 @@ string translate_word(string input, bool isLast)
         e.g. 1-"hello", 2-"there", 3-"school", 0-"apple" */
 
     // 1st first letter is a vowel
-    if(isLetterVowel(input[0]) == true) index = 0;
+    if ((isLetterVowel(input[0]) == true) && (input[0] != 'y')) index = 0;
     // 1st letter is a consonant (& second letter is a vowel)
-    else if(!isLetterVowel(input[0]) && isLetterVowel(input[1])) index = 1;
+    else if ((!isLetterVowel(input[0]) || (input[0] == 'y')) && isLetterVowel(input[1])) index = 1;
     // 1st && 2nd letters are consonants (& 3rd letter is a vowel)
-    else if (!isLetterVowel(input[0]) && !isLetterVowel(input[1]) && isLetterVowel(input[2])) index = 2;
+    else if ((!isLetterVowel(input[0]) || (input[0] == 'y')) && !isLetterVowel(input[1]) && isLetterVowel(input[2])) index = 2;
     // 1st, 2nd, && 3rd letters are consonants
-    else if (!isLetterVowel(input[0]) && !isLetterVowel(input[1]) && !isLetterVowel(input[2]) && isLetterVowel(input[3])) index = 3;
+    else if ((!isLetterVowel(input[0]) || (input[0] == 'y')) && !isLetterVowel(input[1]) && !isLetterVowel(input[2]) && isLetterVowel(input[3])) index = 3;
 
     // string population loop
     for(unsigned int i = 0; i<=strLength; i++) // the "=" (in "i<=strLength")is to add one extra iteration for the zero value index word to output properly.
@@ -145,8 +145,8 @@ string translate_word(string input, bool isLast)
 bool isLetterVowel(char l)
 {
     bool isVowel = false;
-    if(l == 'a' || l == 'e' || l == 'i' || l == 'o' || l == 'u' || l == 'y'/*"Y" as a vowel*/) isVowel = true;
-    cout << "[" << isVowel << "]\n";
+    if(l == 'a' || l == 'e' || l == 'i' || l == 'o' || l == 'u' || /*'y' as a vowel*/ l == 'y') isVowel = true;
+    //cout << "[" << isVowel << "]\n";
     return isVowel;
 }
 
